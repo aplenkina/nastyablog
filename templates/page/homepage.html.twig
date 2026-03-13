@@ -1,5 +1,70 @@
-<h1>Home page of Nastya blog</h1>
+{% extends 'base.html.twig' %}
 
-<div>
-    Start with this number {{ startNumber }}!
-</div>
+{% block title %}Спа зона{% endblock %}
+
+{% block body %}
+    {% set sections = [
+        { id: 1, title: 'Поверив в себя ты отпускаешь контроль над окружающими и взращиваешь в себе личность.' },
+        { id: 2, title: 'Взрослея оставляешь в жизни только то, что нравится. Оставляя в жизни только то, что нравится, взрослеешь.' },
+        { id: 3, title: 'Скучно? Можно чтобы так было всегда.' },
+        { id: 4, title: 'Созависимость - реальная зависимость и лечится как и все остальные, отказом от дозы.' },
+        { id: 5, title: 'Нелюбимая работа будет нелюбимой до тех пор, пока не почувствуешь себя частью коллектива.' },
+        { id: 6, title: 'Страх - детское чувство.' },
+        { id: 7, title: 'Самое важное. Принимая решения, на что опираетесь?' }
+    ] %}
+
+    <main class="relative overflow-hidden">
+        <div class="pointer-events-none absolute -top-20 -left-24 h-72 w-72 rounded-full bg-[#ffb5d0]/70 blur-[120px]"></div>
+        <div class="pointer-events-none absolute top-32 -right-32 h-80 w-80 rounded-full bg-[#7ad3ff]/70 blur-[140px]"></div>
+        <div class="pointer-events-none absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-[#ffd8a8]/50 blur-[160px]"></div>
+
+        <div class="mx-auto max-w-6xl px-6 py-12 lg:py-20 grid gap-10 lg:grid-cols-[220px_1fr_360px]">
+            <aside class="space-y-4">
+                <div class="rounded-3xl border border-white/70 bg-white/60 p-5 shadow-[0_18px_40px_rgba(120,170,230,0.18)] backdrop-blur-xl">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Меню</p>
+                    <nav class="mt-4 flex flex-col gap-3 text-sm font-semibold">
+                        <a class="rounded-2xl border border-transparent bg-white/70 px-4 py-2 text-slate-700 shadow-sm hover:border-[#ffb2c4] hover:text-[#ff5a7a] transition-colors" href="{{ path('diary') }}">
+                            Мой Дневник
+                        </a>
+                        <a class="rounded-2xl border border-transparent px-4 py-2 text-slate-600 hover:border-[#bfe6ff] hover:text-[#1e6ea8] transition-colors" href="#sections">
+                            Комнаты отдыха
+                        </a>
+                        <a class="rounded-2xl border border-transparent px-4 py-2 text-slate-600 hover:border-[#bfe6ff] hover:text-[#1e6ea8] transition-colors" href="#sections">
+                            Сауна
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <section class="space-y-12">
+
+                <div class="space-y-5">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900">
+                        Спа зона
+                    </h1>
+                    <p class="text-lg text-slate-700 max-w-2xl">
+                        Здесь всё создано для мягких решений: тёплые вопросы, ясные акценты и пространство, где можно дышать
+                        свободнее. Соберите свою карту внутренних опор и сделайте следующий шаг спокойно.
+                    </p>
+                </div>
+
+            <aside id="sections" class="rounded-[32px] border border-white/70 bg-white/55 p-6 shadow-[0_18px_45px_rgba(80,140,220,0.18)] backdrop-blur-xl">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-slate-800">Комнаты отдыха</h2>
+                    <span class="rounded-full bg-[#7ad3ff]/30 px-3 py-1 text-xs font-semibold text-[#1e6ea8]">
+                        {{ sections|length }} тем
+                    </span>
+                </div>
+
+                <div class="mt-6 space-y-4">
+                    {% for section in sections %}
+                        <a class="group flex items-start gap-3 rounded-2xl border border-white/70 bg-white/60 p-4 transition hover:border-[#ffb2c4] hover:bg-white/80" href="{{ path('app_article_show', { id: section.id }) }}">
+                            <span class="mt-1 h-3 w-3 rounded-full bg-[#ff5a7a] shadow-[0_0_12px_rgba(255,90,122,0.6)]"></span>
+                            <span class="text-sm text-slate-700 group-hover:text-slate-900">{{ section.title }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </aside>
+        </div>
+    </main>
+{% endblock %}
